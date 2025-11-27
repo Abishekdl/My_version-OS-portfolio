@@ -1,0 +1,57 @@
+/* macOS App Opening Animation */
+
+@keyframes bounce-rotate {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    40% {
+        transform: scale(1.15) rotate(-6deg);
+    }
+
+    70% {
+        transform: scale(0.96) rotate(6deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes zoom-forward {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.25) translateY(-6vh);
+        opacity: 0;
+    }
+}
+
+.app-opening {
+    /* We will handle the animation sequence in JS by adding classes or inline styles, 
+     but we can also define a class that triggers the full sequence if we were using pure CSS.
+     However, the prompt specifies a sequence: bounce-rotate (220ms) -> zoom-forward (420ms).
+     We'll define utility classes for each step to be controlled by the React component.
+  */
+}
+
+.animate-bounce-rotate {
+    animation: bounce-rotate 220ms cubic-bezier(0.22, 1.0, 0.36, 1.0) forwards;
+}
+
+.animate-zoom-forward {
+    animation: zoom-forward 420ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .animate-bounce-rotate,
+    .animate-zoom-forward {
+        animation: none;
+        transition: opacity 200ms ease-out;
+        opacity: 0;
+    }
+}
