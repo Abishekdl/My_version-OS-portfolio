@@ -1,75 +1,27 @@
-# React + TypeScript + Vite
+# 🖥️ Interactive Portfolio OS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully interactive desktop operating system experience built as a portfolio website. This project recreates the look and feel of a modern desktop OS with a boot screen, login interface, and multiple functional applications - all running in your browser.
 
-Currently, two official plugins are available:
+## 📖 About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This portfolio transforms the traditional resume format into an immersive desktop environment. Users can explore my skills, projects, achievements, and contact information through various interactive applications, just like using a real operating system. The project features smooth animations, draggable windows, and a complete theme system.
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### System Features
+- **Boot Sequence** - Authentic OS boot animation on first load
+- **Login Screen** - Interactive login interface to access the desktop
+- **Desktop Environment** - Full-featured desktop with taskbar and system tray
+- **Window Management** - Draggable, resizable, and minimizable windows
+- **Theme System** - Toggle between dark and light modes
+- **Responsive Design** - Works seamlessly across devices
 
-Note: This will impact Vite dev & build performances.
 
-## Expanding the ESLint configuration
+## 📄 License
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This project is open source and available under the MIT License.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🤝 Contributing
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
