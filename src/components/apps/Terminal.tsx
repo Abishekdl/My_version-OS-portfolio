@@ -47,6 +47,8 @@ export const Terminal: React.FC = () => {
                             <div><span className="text-yellow-400">skills</span> - List technical skills</div>
                             <div><span className="text-yellow-400">projects</span> - Show project portfolio</div>
                             <div><span className="text-yellow-400">social</span> - Display social links</div>
+
+                            <div><span className="text-yellow-400">shortcuts</span> - Show keyboard shortcuts</div>
                             <div><span className="text-yellow-400">clear</span> - Clear terminal</div>
                             <div><span className="text-yellow-400">exit</span> - Close terminal</div>
                         </div>
@@ -103,6 +105,47 @@ export const Terminal: React.FC = () => {
                         <a href="https://github.com/Abishekdl" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">GitHub</a>
                         <a href="https://www.linkedin.com/in/abishek-d-27983b249/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">LinkedIn</a>
                         <a href="mailto:abishekofficial2003@gmail.com" className="text-blue-400 hover:underline">Email</a>
+                    </div>
+                );
+                break;
+            case 'shortcuts':
+                output = (
+                    <div className="space-y-2">
+                        <div className="text-cyan-400 font-bold mb-2">⌨️ Keyboard Shortcuts:</div>
+                        <div className="grid grid-cols-1 gap-1 text-gray-300 ml-2">
+                            <div className="flex justify-between max-w-md">
+                                <span>Open App Launcher</span>
+                                <span className="text-yellow-400">Super + Space</span>
+                            </div>
+                            <div className="flex justify-between max-w-md">
+                                <span>Lock Screen</span>
+                                <span className="text-yellow-400">Ctrl + Shift + L</span>
+                            </div>
+                            <div className="flex justify-between max-w-md">
+                                <span>Power Menu</span>
+                                <span className="text-yellow-400">Alt + Shift + P</span>
+                            </div>
+                            <div className="flex justify-between max-w-md">
+                                <span>Show Shortcuts</span>
+                                <span className="text-yellow-400">Ctrl + Shift + /</span>
+                            </div>
+                            <div className="flex justify-between max-w-md">
+                                <span>Open Terminal</span>
+                                <span className="text-yellow-400">Alt + Shift + T</span>
+                            </div>
+                            <div className="flex justify-between max-w-md">
+                                <span>Open Browser</span>
+                                <span className="text-yellow-400">Alt + Shift + B</span>
+                            </div>
+                            <div className="flex justify-between max-w-md">
+                                <span>Open Files</span>
+                                <span className="text-yellow-400">Alt + Shift + F</span>
+                            </div>
+                            <div className="flex justify-between max-w-md">
+                                <span>Close Active Window</span>
+                                <span className="text-yellow-400">Alt + Shift + W</span>
+                            </div>
+                        </div>
                     </div>
                 );
                 break;
