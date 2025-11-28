@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { ZoomIn, ZoomOut, Maximize2, Download, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -12,6 +12,32 @@ export const Notepad: React.FC = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [scale, setScale] = useState(1.0);
     const [loading, setLoading] = useState(true);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (containerRef.current) {
+                const containerWidth = containerRef.current.clientWidth;
+                // Check if mobile (width < 768px)
+                if (containerWidth < 768) {
+                    // Calculate scale to fit width (assuming A4 width ~600px at scale 1)
+                    // Subtract padding (p-4 = 16px * 2 = 32px on mobile)
+                    const availableWidth = containerWidth - 32;
+                    const newScale = Math.min(1, availableWidth / 600);
+                    setScale(newScale);
+                } else {
+                    // Optional: Reset to 1.0 on desktop if needed, or keep current
+                    // For now, we only enforce fit-width on mobile
+                }
+            }
+        };
+
+        // Initial check
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
         setNumPages(numPages);
@@ -85,7 +111,7 @@ export const Notepad: React.FC = () => {
             </div>
 
             {/* PDF Viewer */}
-            <div className="flex-1 overflow-auto flex justify-center p-8 bg-gray-900/50 backdrop-blur-sm relative">
+            <div ref={containerRef} className="flex-1 overflow-auto flex justify-center p-4 md:p-8 bg-gray-900/50 backdrop-blur-sm relative">
                 {loading && (
                     <div className="absolute inset-0 flex items-center justify-center">
                         <Loader2 className="animate-spin text-blue-500" size={32} />

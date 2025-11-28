@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Folder, Home, Code, File, Loader, Plus, FileText, Trash2, Edit2, X, Save, ArrowLeft, ChevronRight } from 'lucide-react';
+import { Folder, Home, Code, File, Loader, Plus, FileText, Trash2, Edit2, X, Save, ArrowLeft, ChevronRight, Menu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Project {
@@ -31,6 +31,7 @@ export const Files: React.FC = () => {
     const [activeTab, setActiveTab] = useState('projects');
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // File System State
     const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
@@ -177,24 +178,58 @@ export const Files: React.FC = () => {
     const currentFiles = files.filter(f => f.parentId === currentFolderId);
 
     return (
-        <div className="flex h-full bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 relative">
+        <div className="flex h-full bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 relative overflow-hidden">
+            {/* Mobile Sidebar Overlay */}
+            {isSidebarOpen && (
+                <div
+                    className="absolute inset-0 bg-black/20 backdrop-blur-sm z-20 md:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
-            <div className="w-48 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-2">
-                <div className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">Favorites</div>
+            <div className={`
+                absolute md:relative inset-y-0 left-0 z-30
+                w-64 md:w-48 bg-gray-50 dark:bg-gray-800 
+                border-r border-gray-200 dark:border-gray-700 
+                p-4 flex flex-col gap-2 transition-transform duration-300 ease-in-out
+                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+            `}>
+                <div className="flex items-center justify-between mb-2">
+                    <div className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Favorites</div>
+                    <button
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="md:hidden p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
+                    >
+                        <X size={16} className="text-gray-500" />
+                    </button>
+                </div>
                 <button
-                    onClick={() => { setActiveTab('home'); setCurrentFolderId(null); }}
+                    onClick={() => {
+                        setActiveTab('home');
+                        setCurrentFolderId(null);
+                        setIsSidebarOpen(false);
+                    }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${activeTab === 'home' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
                 >
                     <Home size={16} /> Home
                 </button>
                 <button
-                    onClick={() => { setActiveTab('projects'); setCurrentFolderId(null); }}
+                    onClick={() => {
+                        setActiveTab('projects');
+                        setCurrentFolderId(null);
+                        setIsSidebarOpen(false);
+                    }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${activeTab === 'projects' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
                 >
                     <Code size={16} /> Projects
                 </button>
                 <button
-                    onClick={() => { setActiveTab('documents'); setCurrentFolderId(null); }}
+                    onClick={() => {
+                        setActiveTab('documents');
+                        setCurrentFolderId(null);
+                        setIsSidebarOpen(false);
+                    }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${activeTab === 'documents' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
                 >
                     <File size={16} /> Documents
@@ -205,6 +240,12 @@ export const Files: React.FC = () => {
             <div className="flex-1 p-6 overflow-auto">
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                        <button
+                            onClick={() => setIsSidebarOpen(true)}
+                            className="md:hidden p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg mr-2"
+                        >
+                            <Menu size={18} />
+                        </button>
                         <Home size={14} />
                         <span>/</span>
                         <span className="capitalize cursor-pointer hover:text-blue-600 dark:hover:text-blue-400" onClick={() => { setCurrentFolderId(null); }}>{activeTab}</span>

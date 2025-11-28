@@ -1,6 +1,6 @@
 import React from 'react';
 import { useThemeStore } from '../../store/useThemeStore';
-import { Monitor, Moon, Sun, Info, Brain, Code, Users } from 'lucide-react';
+import { Monitor, Moon, Sun, Info, Brain, Code, Users, Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const wallpapers = [
@@ -37,21 +37,50 @@ const aboutCards = [
 export const Settings: React.FC = () => {
     const { theme, setTheme, setWallpaper: setThemeWallpaper } = useThemeStore();
     const [activeTab, setActiveTab] = React.useState<'appearance' | 'about'>('appearance');
+    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
     return (
-        <div className="h-full bg-gray-50 dark:bg-gray-900 flex text-gray-900 dark:text-gray-100">
+        <div className="h-full bg-gray-50 dark:bg-gray-900 flex text-gray-900 dark:text-gray-100 relative overflow-hidden">
+            {/* Mobile Sidebar Overlay */}
+            {isSidebarOpen && (
+                <div
+                    className="absolute inset-0 bg-black/20 backdrop-blur-sm z-20 md:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
-            <div className="w-48 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4">
-                <h2 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4">System</h2>
+            <div className={`
+                absolute md:relative inset-y-0 left-0 z-30
+                w-64 md:w-48 bg-white dark:bg-gray-800 
+                border-r border-gray-200 dark:border-gray-700 
+                p-4 transform transition-transform duration-300 ease-in-out
+                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+            `}>
+                <div className="flex items-center justify-between mb-6 md:mb-4">
+                    <h2 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">System</h2>
+                    <button
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="md:hidden p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                    >
+                        <X size={16} className="text-gray-500" />
+                    </button>
+                </div>
                 <div className="space-y-1">
                     <button
-                        onClick={() => setActiveTab('appearance')}
+                        onClick={() => {
+                            setActiveTab('appearance');
+                            setIsSidebarOpen(false);
+                        }}
                         className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 ${activeTab === 'appearance' ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                     >
                         <Monitor size={16} /> Appearance
                     </button>
                     <button
-                        onClick={() => setActiveTab('about')}
+                        onClick={() => {
+                            setActiveTab('about');
+                            setIsSidebarOpen(false);
+                        }}
                         className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 ${activeTab === 'about' ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                     >
                         <Info size={16} /> About
@@ -63,7 +92,15 @@ export const Settings: React.FC = () => {
             <div className="flex-1 p-8 overflow-auto">
                 {activeTab === 'appearance' ? (
                     <>
-                        <h1 className="text-2xl font-bold mb-8">Appearance</h1>
+                        <div className="flex items-center gap-4 mb-8">
+                            <button
+                                onClick={() => setIsSidebarOpen(true)}
+                                className="md:hidden p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                            >
+                                <Menu size={20} />
+                            </button>
+                            <h1 className="text-2xl font-bold">Appearance</h1>
+                        </div>
 
                         {/* Theme */}
                         <section className="mb-8">
@@ -112,7 +149,15 @@ export const Settings: React.FC = () => {
                     </>
                 ) : (
                     <div className="max-w-4xl mx-auto">
-                        <h1 className="text-2xl font-bold mb-8">About</h1>
+                        <div className="flex items-center gap-4 mb-8">
+                            <button
+                                onClick={() => setIsSidebarOpen(true)}
+                                className="md:hidden p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                            >
+                                <Menu size={20} />
+                            </button>
+                            <h1 className="text-2xl font-bold">About</h1>
+                        </div>
 
                         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 mb-8 shadow-sm">
                             <div className="flex items-center gap-4 mb-6">

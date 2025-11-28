@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, GraduationCap, Code, Database, Layers, Cpu } from 'lucide-react';
+import { ChevronRight, GraduationCap, Code, Database, Layers, Cpu, Menu, X } from 'lucide-react';
 
 interface YearSection {
     id: string;
@@ -83,25 +83,51 @@ const timelineData: YearSection[] = [
 
 export const LearningJourneyV3: React.FC = () => {
     const [selectedYear, setSelectedYear] = useState<string>('2025');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const activeSection = timelineData.find(s => s.id === selectedYear) || timelineData[timelineData.length - 1];
 
     return (
-        <div className="flex h-full w-full bg-white dark:bg-[#0f172a] text-gray-900 dark:text-white overflow-hidden font-sans transition-colors duration-300">
+        <div className="flex h-full w-full bg-white dark:bg-[#0f172a] text-gray-900 dark:text-white overflow-hidden font-sans transition-colors duration-300 relative">
+            {/* Mobile Sidebar Overlay */}
+            {isSidebarOpen && (
+                <div
+                    className="absolute inset-0 bg-black/20 backdrop-blur-sm z-20 md:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
-            <div className="w-64 bg-gray-50 dark:bg-slate-900/50 border-r border-gray-200 dark:border-white/10 flex flex-col backdrop-blur-xl transition-colors duration-300">
-                <div className="p-6 border-b border-gray-200 dark:border-white/5">
-                    <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
-                        Timeline
-                    </h1>
-                    <p className="text-xs text-gray-500 dark:text-slate-400 mt-1">Your Learning Journey</p>
+            <div className={`
+                absolute md:relative inset-y-0 left-0 z-30
+                w-64 bg-gray-50 dark:bg-slate-900/50 
+                border-r border-gray-200 dark:border-white/10 
+                flex flex-col backdrop-blur-xl transition-all duration-300
+                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+            `}>
+                <div className="p-6 border-b border-gray-200 dark:border-white/5 flex justify-between items-center">
+                    <div>
+                        <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
+                            Timeline
+                        </h1>
+                        <p className="text-xs text-gray-500 dark:text-slate-400 mt-1">Your Learning Journey</p>
+                    </div>
+                    <button
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="md:hidden p-1 hover:bg-gray-200 dark:hover:bg-white/10 rounded-md transition-colors"
+                    >
+                        <X size={18} className="text-gray-500 dark:text-slate-400" />
+                    </button>
                 </div>
 
                 <div className="flex-1 overflow-y-auto py-4">
                     {timelineData.map((item) => (
                         <button
                             key={item.id}
-                            onClick={() => setSelectedYear(item.id)}
+                            onClick={() => {
+                                setSelectedYear(item.id);
+                                setIsSidebarOpen(false);
+                            }}
                             className={`w-full px-6 py-3 flex items-center justify-between transition-all duration-200 group ${selectedYear === item.id
                                 ? 'bg-blue-50 dark:bg-blue-500/10 border-l-2 border-blue-500 dark:border-blue-400'
                                 : 'hover:bg-gray-100 dark:hover:bg-white/5 border-l-2 border-transparent'
@@ -129,6 +155,13 @@ export const LearningJourneyV3: React.FC = () => {
 
             {/* Main Content */}
             <div className="flex-1 relative overflow-hidden bg-gray-50/50 dark:bg-slate-900/30 transition-colors duration-300">
+                {/* Mobile Menu Button */}
+                <button
+                    onClick={() => setIsSidebarOpen(true)}
+                    className="absolute top-4 left-4 z-10 md:hidden p-2 bg-white/50 dark:bg-black/20 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-lg shadow-sm"
+                >
+                    <Menu size={20} className="text-gray-700 dark:text-white" />
+                </button>
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeSection.id}
@@ -136,7 +169,7 @@ export const LearningJourneyV3: React.FC = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -20, scale: 0.98 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="absolute inset-0 p-12 flex flex-col justify-center max-w-4xl mx-auto"
+                        className="absolute inset-0 p-6 md:p-12 flex flex-col justify-center max-w-4xl mx-auto"
                     >
                         <div className="mb-8">
                             <motion.div
@@ -148,7 +181,7 @@ export const LearningJourneyV3: React.FC = () => {
                                 <div className={`p-3 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 ${activeSection.color} shadow-sm dark:shadow-none`}>
                                     <activeSection.icon size={32} />
                                 </div>
-                                <span className="text-5xl font-bold text-gray-200 dark:text-white/10 select-none transition-colors duration-300">
+                                <span className="text-3xl md:text-5xl font-bold text-gray-200 dark:text-white/10 select-none transition-colors duration-300">
                                     {activeSection.year}
                                 </span>
                             </motion.div>
@@ -157,7 +190,7 @@ export const LearningJourneyV3: React.FC = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
-                                className="text-4xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300"
+                                className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300"
                             >
                                 {activeSection.title}
                             </motion.h2>
@@ -166,7 +199,7 @@ export const LearningJourneyV3: React.FC = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="text-xl text-gray-500 dark:text-slate-400 font-light transition-colors duration-300"
+                                className="text-lg md:text-xl text-gray-500 dark:text-slate-400 font-light transition-colors duration-300"
                             >
                                 {activeSection.subtitle}
                             </motion.p>
