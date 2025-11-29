@@ -21,7 +21,7 @@ export const LoginScreen: React.FC = () => {
         <div
             className="h-screen w-screen bg-cover bg-center flex flex-col items-center justify-center text-white relative px-4"
             style={{
-                backgroundImage: 'url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=2070")',
+                backgroundImage: 'url("/wallpaper5.png")',
                 backgroundColor: 'rgba(0,0,0,0.4)',
                 backgroundBlendMode: 'overlay'
             }}

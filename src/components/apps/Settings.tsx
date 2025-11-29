@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const wallpapers = [
     "/arch_wallpaper.png",
-    "https://images.unsplash.com/photo-1477346611705-65d1883cee1e?auto=format&fit=crop&q=80&w=2070",
+    "/wallpaper5.png",
     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=2070",
     "/wallpaper3.png",
 ];
