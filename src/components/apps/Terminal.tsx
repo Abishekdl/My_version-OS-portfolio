@@ -60,7 +60,7 @@ export const Terminal: React.FC = () => {
                 break;
             case 'bio':
                 output = (
-                    <div className="text-gray-300 max-w-md">
+                    <div className="text-gray-300 max-w-md break-words">
                         I am a Full Stack Developer passionate about building interactive web experiences.
                         I love React, TypeScript, and modern web technologies.
                     </div>
@@ -69,9 +69,9 @@ export const Terminal: React.FC = () => {
             case 'skills':
                 output = (
                     <div className="text-gray-300">
-                        <div>Frontend: React, TypeScript, Tailwind CSS</div>
-                        <div>Backend: Node.js, Python, Go</div>
-                        <div>Tools: Git, Docker, Linux</div>
+                        <div className="break-words">Frontend: React, TypeScript, Tailwind CSS</div>
+                        <div className="break-words">Backend: Node.js, Python, Go</div>
+                        <div className="break-words">Tools: Git, Docker, Linux</div>
                     </div>
                 );
                 break;
@@ -81,30 +81,30 @@ export const Terminal: React.FC = () => {
                         <div className="text-cyan-400 font-bold">📁 Featured Projects:</div>
                         <div className="ml-2">
                             <div className="text-yellow-400">1. AbishekOS</div>
-                            <div className="text-sm ml-2 text-gray-400">Linux-style portfolio OS built with React & TypeScript</div>
+                            <div className="text-sm ml-2 text-gray-400 break-words">Linux-style portfolio OS built with React & TypeScript</div>
                         </div>
                         <div className="ml-2">
                             <div className="text-yellow-400">2. Fruit Detection System</div>
-                            <div className="text-sm ml-2 text-gray-400">ML-powered fruit classification system</div>
+                            <div className="text-sm ml-2 text-gray-400 break-words">ML-powered fruit classification system</div>
                         </div>
                         <div className="ml-2">
                             <div className="text-yellow-400">3. Employee Manager App</div>
-                            <div className="text-sm ml-2 text-gray-400">Full-stack employee management solution</div>
+                            <div className="text-sm ml-2 text-gray-400 break-words">Full-stack employee management solution</div>
                         </div>
                         <div className="ml-2">
                             <div className="text-yellow-400">4. Campus Monitoring System</div>
-                            <div className="text-sm ml-2 text-gray-400">Real-time campus security monitoring</div>
+                            <div className="text-sm ml-2 text-gray-400 break-words">Real-time campus security monitoring</div>
                         </div>
-                        <div className="text-sm text-gray-500 mt-2">💡 Open Files app (Ctrl+Shift+F) for more details</div>
+                        <div className="text-sm text-gray-500 mt-2 break-words">💡 Open Files app (Ctrl+Shift+F) for more details</div>
                     </div>
                 );
                 break;
             case 'social':
                 output = (
                     <div className="flex flex-col gap-1">
-                        <a href="https://github.com/Abishekdl" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">GitHub</a>
-                        <a href="https://www.linkedin.com/in/abishek-d-27983b249/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">LinkedIn</a>
-                        <a href="mailto:abishekofficial2003@gmail.com" className="text-blue-400 hover:underline">Email</a>
+                        <a href="https://github.com/Abishekdl" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline break-words">GitHub</a>
+                        <a href="https://www.linkedin.com/in/abishek-d-27983b249/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline break-words">LinkedIn</a>
+                        <a href="mailto:abishekofficial2003@gmail.com" className="text-blue-400 hover:underline break-words">Email</a>
                     </div>
                 );
                 break;
@@ -113,35 +113,35 @@ export const Terminal: React.FC = () => {
                     <div className="space-y-2">
                         <div className="text-cyan-400 font-bold mb-2">⌨️ Keyboard Shortcuts:</div>
                         <div className="grid grid-cols-1 gap-1 text-gray-300 ml-2">
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Open App Launcher</span>
                                 <span className="text-yellow-400">Super + Space</span>
                             </div>
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Lock Screen</span>
                                 <span className="text-yellow-400">Ctrl + Shift + L</span>
                             </div>
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Power Menu</span>
                                 <span className="text-yellow-400">Alt + Shift + P</span>
                             </div>
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Show Shortcuts</span>
                                 <span className="text-yellow-400">Ctrl + Shift + /</span>
                             </div>
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Open Terminal</span>
                                 <span className="text-yellow-400">Alt + Shift + T</span>
                             </div>
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Open Browser</span>
                                 <span className="text-yellow-400">Alt + Shift + B</span>
                             </div>
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Open Files</span>
                                 <span className="text-yellow-400">Alt + Shift + F</span>
                             </div>
-                            <div className="flex justify-between max-w-md">
+                            <div className="flex flex-col sm:flex-row sm:justify-between max-w-md">
                                 <span>Close Active Window</span>
                                 <span className="text-yellow-400">Alt + Shift + W</span>
                             </div>
@@ -151,7 +151,7 @@ export const Terminal: React.FC = () => {
                 break;
             case 'archfetch':
                 output = (
-                    <div className="flex gap-4 font-mono text-sm">
+                    <div className="flex flex-col sm:flex-row gap-4 font-mono text-sm">
                         <div className="text-blue-500 hidden sm:block">
                             {`
       /\\
@@ -186,7 +186,7 @@ export const Terminal: React.FC = () => {
             case '':
                 return;
             default:
-                output = <div className="text-red-400">Command not found: {cmd}</div>;
+                output = <div className="text-red-400 break-words">Command not found: {cmd}</div>;
         }
 
         setHistory(prev => [...prev, { command: cmd, output }]);
@@ -204,30 +204,34 @@ export const Terminal: React.FC = () => {
             className="h-full w-full bg-black/90 text-green-500 font-mono overflow-auto text-sm"
             onClick={() => inputRef.current?.focus()}
         >
-            <div className="p-4">
+            <div className="p-2 md:p-4">
                 {history.map((item, i) => (
                     <div key={i} className="mb-2">
                         {item.command && (
-                            <div className="flex items-center gap-2">
-                                <span className="text-blue-400">➜</span>
-                                <span className="text-cyan-400">~</span>
-                                <span className="text-gray-400">{item.command}</span>
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <div className="flex items-center gap-2 shrink-0">
+                                    <span className="text-blue-400">➜</span>
+                                    <span className="text-cyan-400">~</span>
+                                </div>
+                                <span className="text-gray-400 break-all">{item.command}</span>
                             </div>
                         )}
-                        <div className="ml-4">{item.output}</div>
+                        <div className="ml-0 md:ml-4 mt-1 md:mt-0">{item.output}</div>
                     </div>
                 ))}
 
                 <div className="flex items-center gap-2">
-                    <span className="text-blue-400">➜</span>
-                    <span className="text-cyan-400">~</span>
+                    <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-blue-400">➜</span>
+                        <span className="text-cyan-400">~</span>
+                    </div>
                     <input
                         ref={inputRef}
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        className="bg-transparent border-none outline-none flex-1 text-gray-200"
+                        className="bg-transparent border-none outline-none flex-1 text-gray-200 min-w-0"
                         autoFocus
                     />
                 </div>
