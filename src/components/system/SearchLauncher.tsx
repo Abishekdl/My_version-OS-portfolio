@@ -20,7 +20,7 @@ const apps = [
 
 export const SearchLauncher: React.FC = () => {
     const { isLauncherOpen, setLauncherOpen } = useSystemStore();
-    const { openWindow } = useWindowStore();
+    const { toggleWindow } = useWindowStore();
     const [query, setQuery] = useState('');
     const [selectedIndex, setSelectedIndex] = useState(0);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -46,7 +46,7 @@ export const SearchLauncher: React.FC = () => {
         } else if (e.key === 'Enter') {
             if (filteredApps[selectedIndex]) {
                 const app = filteredApps[selectedIndex];
-                openWindow(app.id, app.title, app.id, getAppComponent(app.id));
+                toggleWindow(app.id, app.title, app.id, getAppComponent(app.id));
                 setLauncherOpen(false);
             }
         } else if (e.key === 'Escape') {
@@ -86,7 +86,7 @@ export const SearchLauncher: React.FC = () => {
                             className={`flex items-center gap-4 p-4 cursor-pointer transition-colors ${index === selectedIndex ? 'bg-blue-600/20' : 'hover:bg-white/5'
                                 }`}
                             onClick={() => {
-                                openWindow(app.id, app.title, app.id, getAppComponent(app.id));
+                                toggleWindow(app.id, app.title, app.id, getAppComponent(app.id));
                                 setLauncherOpen(false);
                             }}
                             onMouseEnter={() => setSelectedIndex(index)}

@@ -20,7 +20,7 @@ const apps = [
 ];
 
 export const Dock: React.FC = () => {
-    const { openWindow, windows } = useWindowStore();
+    const { windows } = useWindowStore();
 
     // Hide dock if any window is maximized
     const hasMaximizedWindow = windows.some(w => w.isMaximized);
@@ -42,7 +42,10 @@ export const Dock: React.FC = () => {
                             icon={app.icon}
                             color={app.color}
                             isOpen={isOpen}
-                            onClick={() => openWindow(app.id, app.title, app.id, getAppComponent(app.id))}
+                            onClick={() => {
+                                const { toggleWindow } = useWindowStore.getState();
+                                toggleWindow(app.id, app.title, app.id, getAppComponent(app.id));
+                            }}
                         />
                     );
                 })}

@@ -27,9 +27,10 @@ interface WindowStore {
     focusWindow: (id: string) => void;
     updateWindowPosition: (id: string, x: number, y: number) => void;
     updateWindowSize: (id: string, width: number, height: number) => void;
+    toggleWindow: (id: string, title: string, icon: string, component: React.ReactNode) => void;
 }
 
-export const useWindowStore = create<WindowStore>((set) => ({
+export const useWindowStore = create<WindowStore>((set, get) => ({
     windows: [],
     activeWindowId: null,
     zIndexCounter: 100,
@@ -54,7 +55,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
         const availableHeight = window.innerHeight - taskbarHeight - dockHeight;
         const x = Math.max(0, (window.innerWidth - defaultWidth) / 2);
         const y = Math.max(taskbarHeight, taskbarHeight + (availableHeight - defaultHeight) / 2);
-        
+
         console.log('Opening window:', id, 'at position:', { x, y }, 'viewport:', { width: window.innerWidth, height: window.innerHeight });
 
         return {
@@ -137,4 +138,20 @@ export const useWindowStore = create<WindowStore>((set) => ({
             w.id === id ? { ...w, size: { width, height } } : w
         )
     })),
+
+    toggleWindow: (id, title, icon, component) => {
+        const state = get();
+        const window = state.windows.find(w => w.id === id);
+
+        if (!window) {
+            // Not open -> Open it
+            state.openWindow(id, title, icon, component);
+        } else if (state.activeWindowId === id && !window.isMinimized) {
+            // Open and focused -> Minimize
+            state.minimizeWindow(id);
+        } else {
+            // Open but not focused (or minimized) -> Focus
+            state.focusWindow(id);
+        }
+    },
 }));
